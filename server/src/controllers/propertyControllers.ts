@@ -134,7 +134,7 @@ export const getProperties = async (req: Request, res: Response): Promise<void> 
                     )
                 )as location
                 FROM "Property" p
-                JOIN "Location" l ON p."locationID" = l.id
+                JOIN "Location" l ON p."locationId" = l.id
                 ${
                     whereConditions.length > 0
                         ? Prisma.sql`WHERE ${Prisma.join(whereConditions, "AND ")}`
