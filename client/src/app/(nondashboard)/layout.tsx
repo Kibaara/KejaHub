@@ -13,18 +13,21 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (authUser) {
-      const userRole = authUser.userRole?.toLowerCase();
-      if (
-        (userRole === "manager" && pathname.startsWith("/search")) ||
-        (userRole === "manager" && pathname === "/")
-      ) {
-        router.push("/managers/properties", { scroll: false });
-      } else {
-        setIsLoading(false);
-      }
+  if (authUser) {
+    const userRole = authUser.userRole?.toLowerCase();
+    if (
+      (userRole === "manager" && pathname.startsWith("/search")) ||
+      (userRole === "manager" && pathname === "/")
+    ) {
+      router.push("/managers/properties", { scroll: false });
+    } else {
+      setIsLoading(false);
     }
-  }, [authUser, router, pathname]);
+  } else if (!authLoading) {
+    setIsLoading(false); // allow public users through
+  }
+}, [authUser, authLoading, router, pathname]);
+
 
   if (authLoading || isLoading) return <>Loading...</>;
 

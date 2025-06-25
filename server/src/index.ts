@@ -36,7 +36,7 @@ app.use('/applications', applicationRoutes)
 app.use("/properties", propertyRoutes)
 app.use("/leases", leaseRoutes)
 app.use('/tenants', authMiddleware(['tenant']), tenantRoutes)
-app.use('/manager', authMiddleware(['manager']), managerRoutes)
+app.use('/managers', authMiddleware(['manager']), managerRoutes)
 
 
 /* SERVER */
